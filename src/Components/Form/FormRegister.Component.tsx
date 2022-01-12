@@ -1,10 +1,16 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import classes from "../../Styles/Triangle.module.scss";
 
 export const FormRegister = () => {
 	const [userRegister, setUserRegister] =
 		useState<{ [key: string]: string }>();
+
+	const onSubmit = (ev: React.FormEvent<HTMLFormElement>) => {};
+
+	const onChange = (ev: React.ChangeEvent<HTMLInputElement>) => {};
+
+	const setError = () => {};
 
 	return (
 		<div className="h-screen bg-gradient-to-br from-blue-600 to-indigo-600 flex justify-center items-center w-full">
@@ -52,12 +58,12 @@ export const FormRegister = () => {
 						</div>
 					</div>
 					<button className="mt-4 w-full bg-gradient-to-tr from-blue-600 to-indigo-600 text-indigo-100 py-2 rounded-md text-lg tracking-wide">
-						Sign In
+						Sign Up
 					</button>
 					<p className="items-center mt-4 mb-4 text-center">
 						Already Have An Account
 					</p>
-					<div className="flex justify-center">
+					<div className="flex justify-center items-center ml-6">
 						<Link to="/">
 							<button className="border-2 rounded-lg font-bold text-blue-500 px-4 py-3 transition duration-300 ease-in-out hover:bg-blue-500 hover:text-white mr-6">
 								Sign In
