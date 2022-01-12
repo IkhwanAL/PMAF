@@ -1,6 +1,11 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import classes from "../../Styles/Triangle.module.scss";
 
 export const FormRegister = () => {
+	const [userRegister, setUserRegister] =
+		useState<{ [key: string]: string }>();
+
 	return (
 		<div className="h-screen bg-gradient-to-br from-blue-600 to-indigo-600 flex justify-center items-center w-full">
 			<form className="mr-96">
@@ -62,7 +67,7 @@ export const FormRegister = () => {
 				</div>
 			</form>
 			<div>
-				<div className="bottom-0 right-0"></div>
+				<div className={classes.arrowRight}></div>
 			</div>
 		</div>
 	);

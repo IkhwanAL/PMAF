@@ -1,0 +1,12 @@
+.arrowRight {
+	position: absolute;
+	right: 0px;
+	bottom: 0px;
+	width: 0;
+	height: 0;
+	border-top: 700px solid #14279b;
+	border-bottom: 700px solid #5c7aea;
+	border-left: 700px solid transparent;
+	// border-right: 700px solid sandybrown;
+	background-image: url("../assets/patternpad.svg");
+}
