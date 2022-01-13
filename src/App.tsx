@@ -21,11 +21,7 @@ function App() {
 				>
 					<Route index element={<RecentPage />} />
 					<Route path="project" element={<ProjectPage />}>
-<<<<<<< HEAD
-						<Route path=":idProject"></Route>
-=======
 						<Route path=":idProject" element={<OneProject />} />
->>>>>>> e6f55796ea9b106c97425aa956e8eec4d5b49518
 					</Route>
 				</Route>
 			</Routes>
