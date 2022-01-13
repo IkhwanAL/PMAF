@@ -8,17 +8,22 @@ export const FormLogin = () => {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		const timeoutAlert = setTimeout(() => {
-			setErrorState(false);
-		}, 3000);
-
+		let timeoutAlert: any = null;
+		if (errorState != null && errorState === true) {
+			timeoutAlert = setTimeout(() => {
+				setErrorState(false);
+			}, 3000);
+		}
 		return () => {
 			clearTimeout(timeoutAlert);
 		};
-	});
+	}, [errorState]);
+
 	const onSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
 		ev.preventDefault();
+
 		if (user) {
+			setErrorState(false);
 			navigate("/main/dashboard", { replace: true });
 			return;
 		}
@@ -41,8 +46,6 @@ export const FormLogin = () => {
 		} else if (errorState == null) {
 			classAlert = `invisible`;
 		}
-
-		console.log(classAlert);
 
 		return (
 			<div

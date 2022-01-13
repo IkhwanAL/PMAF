@@ -4,6 +4,7 @@ import "./App.css";
 import ProjectPage from "./Layout/AllProject.Layout";
 import Dashboard from "./Layout/Dashboard.Layout";
 import LoginPages from "./Layout/Login.Layout";
+import OneProject from "./Layout/OneProject.Layout";
 import RecentPage from "./Layout/Recent.Layout";
 import RegisterPage from "./Layout/Register.Layout";
 
@@ -19,7 +20,9 @@ function App() {
 					caseSensitive
 				>
 					<Route index element={<RecentPage />} />
-					<Route path="project" element={<ProjectPage />} />
+					<Route path="project" element={<ProjectPage />}>
+						<Route path=":idProject" element={<OneProject />} />
+					</Route>
 				</Route>
 			</Routes>
 		</div>
