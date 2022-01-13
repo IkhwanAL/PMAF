@@ -16,9 +16,23 @@ export const FormLogin = () => {
 			clearTimeout(timeoutAlert);
 		};
 	});
+
+	interface UserLogin {
+		username: string;
+		password: string;
+	}
+
+	const instanceOfUser = (object: any): object is UserLogin => {
+		return "username" in object && "password" in object;
+	};
+
 	const onSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
 		ev.preventDefault();
-		if (user) {
+		if (!user) {
+			setErrorState(true);
+			return;
+		}
+		if (instanceOfUser(user)) {
 			navigate("/main/dashboard", { replace: true });
 			return;
 		}

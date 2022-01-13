@@ -34,7 +34,7 @@ export const FormRegister = () => {
 								Email
 							</label>
 							<input
-								type="text"
+								type="email"
 								className="bg-indigo-50 px-4 py-2 outline-none rounded-md w-full"
 							/>
 						</div>
@@ -43,7 +43,7 @@ export const FormRegister = () => {
 								Password
 							</label>
 							<input
-								type="text"
+								type="password"
 								className="bg-indigo-50 px-4 py-2 outline-none rounded-md w-full"
 							/>
 						</div>

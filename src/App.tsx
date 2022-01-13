@@ -19,7 +19,9 @@ function App() {
 					caseSensitive
 				>
 					<Route index element={<RecentPage />} />
-					<Route path="project" element={<ProjectPage />} />
+					<Route path="project" element={<ProjectPage />}>
+						<Route path=":idProject"></Route>
+					</Route>
 				</Route>
 			</Routes>
 		</div>

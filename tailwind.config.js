@@ -12,9 +12,6 @@ module.exports = {
 				0: "0",
 			},
 		},
-		borderRadius: {
-			triangle: "100px solid red",
-		},
 		keyframes: {
 			"fade-in-down": {
 				"0%": {
