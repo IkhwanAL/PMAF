@@ -11,7 +11,7 @@ export const Header = () => {
 	};
 	return (
 		<div className="flex p-2 text-gray-900 bg-white rounded-sm shadow-lg font-medium capitalize">
-			<button
+			<div
 				// style={{ borderRadius: 10, backgroundColor: "black" }}
 				className="rounded-full w-10 h-10 ml-auto hover:shadow-xl hover:bg-gray-300 "
 			>
@@ -21,7 +21,7 @@ export const Header = () => {
 						onClick={onClick}
 					/>
 				</button>
-			</button>
+			</div>
 		</div>
 	);
 };

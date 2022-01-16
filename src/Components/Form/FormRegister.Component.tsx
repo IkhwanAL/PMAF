@@ -1,20 +1,72 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { UserRegister } from "../../Props/User.property";
 import classes from "../../Styles/Triangle.module.scss";
+import { ErrorComp } from "../Error.Component";
 
 export const FormRegister = () => {
-	const [userRegister, setUserRegister] =
-		useState<{ [key: string]: string }>();
+	const navigate = useNavigate();
 
-	const onSubmit = (ev: React.FormEvent<HTMLFormElement>) => {};
+	const [userRegister, setUserRegister] = useState<
+		{ [key: string]: string } | UserRegister
+	>();
 
-	const onChange = (ev: React.ChangeEvent<HTMLInputElement>) => {};
+	const [useError, setErrorState] = useState<{
+		error: boolean;
+		msg?: string | null;
+	}>();
 
-	const setError = () => {};
+	const onSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
+		ev.preventDefault();
+		if (!userRegister) {
+			setErrorState({ error: true, msg: "Kolom Kosong" });
+			return;
+		}
+
+		if (!userRegister.username || userRegister.username.length === 0) {
+			setErrorState({ error: true, msg: "Username Kosong" });
+			return;
+		}
+
+		if (!userRegister.email || userRegister.email.length === 0) {
+			setErrorState({ error: true, msg: "Email Kosong" });
+			return;
+		}
+
+		if (!userRegister.password || userRegister.password.length === 0) {
+			setErrorState({ error: true, msg: "Password Kosong" });
+			return;
+		}
+
+		if (
+			!userRegister.confirmPassword ||
+			userRegister.confirmPassword.length === 0
+		) {
+			setErrorState({ error: true, msg: "Confirm Password Kosong" });
+			return;
+		}
+
+		if (userRegister.password !== userRegister.confirmPassword) {
+			setErrorState({
+				error: true,
+				msg: "Password Tidak Sama Dengan Confirm Password",
+			});
+			return;
+		}
+
+		navigate("/main/dashboard", { replace: true });
+	};
+
+	const onChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
+		ev.preventDefault();
+		const { name, value } = ev.target;
+		setUserRegister({ ...userRegister, [name]: value });
+	};
 
 	return (
 		<div className="h-screen bg-gradient-to-br from-blue-600 to-indigo-600 flex justify-center items-center w-full">
-			<form className="mr-96">
+			<ErrorComp error={useError?.error} msg={useError?.msg} />
+			<form className="mr-96 z-40" onSubmit={onSubmit}>
 				<div className="bg-white px-10 py-8 rounded-xl w-screen shadow-md max-w-sm">
 					<div className="space-y-4">
 						<h1 className="text-center text-2xl font-semibold text-gray-600">
@@ -26,6 +78,8 @@ export const FormRegister = () => {
 							</label>
 							<input
 								type="text"
+								name="username"
+								onChange={onChange}
 								className="bg-indigo-50 px-4 py-2 outline-none rounded-md w-full"
 							/>
 						</div>
@@ -34,7 +88,9 @@ export const FormRegister = () => {
 								Email
 							</label>
 							<input
+								name="email"
 								type="email"
+								onChange={onChange}
 								className="bg-indigo-50 px-4 py-2 outline-none rounded-md w-full"
 							/>
 						</div>
@@ -43,7 +99,9 @@ export const FormRegister = () => {
 								Password
 							</label>
 							<input
+								name="password"
 								type="password"
+								onChange={onChange}
 								className="bg-indigo-50 px-4 py-2 outline-none rounded-md w-full"
 							/>
 						</div>
@@ -52,7 +110,9 @@ export const FormRegister = () => {
 								Confirm Password
 							</label>
 							<input
-								type="text"
+								name="confirmPassword"
+								type="password"
+								onChange={onChange}
 								className="bg-indigo-50 px-4 py-2 outline-none rounded-md w-full"
 							/>
 						</div>
@@ -64,10 +124,11 @@ export const FormRegister = () => {
 						Already Have An Account
 					</p>
 					<div className="flex justify-center items-center ml-6">
-						<Link to="/">
-							<button className="border-2 rounded-lg font-bold text-blue-500 px-4 py-3 transition duration-300 ease-in-out hover:bg-blue-500 hover:text-white mr-6">
-								Sign In
-							</button>
+						<Link
+							to="/"
+							className="border-2 rounded-lg font-bold text-blue-500 px-4 py-3 transition duration-300 ease-in-out hover:bg-blue-500 hover:text-white mr-6"
+						>
+							Sign In
 						</Link>
 					</div>
 				</div>

@@ -1,45 +1,50 @@
 import React, { ReactElement, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { UserLogin } from "../../Props/User.property";
 import classes from "../../Styles/Triangle.module.scss";
 
 export const FormLogin = () => {
-	const [user, setUser] = useState<{ [key: string]: string }>();
-	const [errorState, setErrorState] = useState<boolean | null>(null);
+	const [user, setUser] = useState<UserLogin | { [key: string]: string }>();
+	const [errorState, setErrorState] = useState<{
+		error: boolean;
+		msg?: string | null;
+	} | null>(null);
 	const navigate = useNavigate();
 
 	useEffect(() => {
 		let timeoutAlert: any = null;
-		if (errorState != null && errorState === true) {
+		if (errorState != null && errorState.error === true) {
 			timeoutAlert = setTimeout(() => {
-				setErrorState(false);
+				setErrorState({ error: false, msg: errorState.msg });
 			}, 3000);
 		}
 		return () => {
 			clearTimeout(timeoutAlert);
 		};
-	});
-
-	interface UserLogin {
-		username: string;
-		password: string;
-	}
-
-	const instanceOfUser = (object: any): object is UserLogin => {
-		return "username" in object && "password" in object;
-	};
+	}, [errorState]);
 
 	const onSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
 		ev.preventDefault();
+
 		if (!user) {
-			setErrorState(true);
-			return;
-		}
-		if (instanceOfUser(user)) {
-			navigate("/main/dashboard", { replace: true });
+			setErrorState({
+				error: true,
+				msg: "Kolom Tidak Di isi",
+			});
 			return;
 		}
 
-		setErrorState(true);
+		if (!user.username || user.username.length === 0) {
+			setErrorState({ error: true, msg: "Username Kosong" });
+			return;
+		}
+
+		if (!user.password || user.password.length === 0) {
+			setErrorState({ error: true, msg: "Password Kosong" });
+			return;
+		}
+
+		navigate("/main/dashboard", { replace: true });
 	};
 
 	const onChangeInput = (ev: React.ChangeEvent<HTMLInputElement>): void => {
@@ -50,11 +55,11 @@ export const FormLogin = () => {
 
 	const setError = (): ReactElement => {
 		let classAlert: string = "";
-		if (errorState === true) {
+		if (errorState?.error === true) {
 			classAlert = `animate-fade-in-down`;
-		} else if (errorState === false) {
+		} else if (errorState?.error === false) {
 			classAlert = `animate-fade-in-down-deep invisible`;
-		} else if (errorState == null) {
+		} else if (errorState?.error == null) {
 			classAlert = `invisible`;
 		}
 
@@ -77,9 +82,7 @@ export const FormLogin = () => {
 						></path>
 					</svg>
 					<div>
-						<span className="font-medium">
-							Username Dan Password Tidak Sesuai
-						</span>
+						<span className="font-medium">{errorState?.msg}</span>
 					</div>
 				</div>
 			</div>
@@ -89,7 +92,7 @@ export const FormLogin = () => {
 	return (
 		<div className="h-screen bg-gradient-to-br from-blue-600 to-indigo-600 flex justify-center items-center w-full">
 			{setError()}
-			<form onSubmit={onSubmit} className="mr-80 w-fit shadow-lg ">
+			<form onSubmit={onSubmit} className="mr-80 w-fit shadow-lg z-40">
 				<div className="bg-white px-10 py-8 rounded-xl w-screen shadow-md max-w-sm">
 					<div className="space-y-4">
 						<h1 className="text-center text-2xl font-semibold text-gray-600">
@@ -125,10 +128,11 @@ export const FormLogin = () => {
 						Don't Have An Account
 					</p>
 					<div className="flex justify-center">
-						<Link to="/signup">
-							<button className="border-2 rounded-lg font-bold text-blue-500 px-4 py-3 transition duration-300 ease-in-out hover:bg-blue-500 hover:text-white mr-6">
-								Sign Up
-							</button>
+						<Link
+							to="/signup"
+							className="border-2 rounded-lg font-bold text-blue-500 px-4 py-3 transition duration-300 ease-in-out hover:bg-blue-500 hover:text-white mr-6"
+						>
+							Sign Up
 						</Link>
 					</div>
 				</div>

@@ -1,4 +1,3 @@
-import React from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import ProjectPage from "./Layout/AllProject.Layout";
@@ -20,9 +19,8 @@ function App() {
 					caseSensitive
 				>
 					<Route index element={<RecentPage />} />
-					<Route path="project" element={<ProjectPage />}>
-						<Route path=":idProject" element={<OneProject />} />
-					</Route>
+					<Route path="project" element={<ProjectPage />} />
+					<Route path="detail/:idProject" element={<OneProject />} />
 				</Route>
 			</Routes>
 		</div>
