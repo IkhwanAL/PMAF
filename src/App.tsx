@@ -9,7 +9,7 @@ import RegisterPage from "./Layout/Register.Layout";
 
 function App() {
 	return (
-		<div className="bg-blue-500">
+		<div className="bg-blue-300">
 			<Routes>
 				<Route path="/" element={<LoginPages />} />
 				<Route path="/signup" element={<RegisterPage />} />

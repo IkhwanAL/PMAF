@@ -4,10 +4,10 @@ import { Header } from "../Components/Header.Component";
 const Dashboard = () => {
 	return (
 		<>
-			<div className="w-full h-full">
+			<div className="">
 				<Header />
+				<Outlet />
 			</div>
-			<Outlet />
 		</>
 	);
 };

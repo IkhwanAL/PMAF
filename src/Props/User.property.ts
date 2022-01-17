@@ -14,3 +14,11 @@ export enum TypeUser {
 	"Proyek Manager",
 	"Tim",
 }
+
+export interface DataUser {
+	id: string;
+	username: string;
+	password: string;
+	email: string;
+	phoneNumber: string;
+}
