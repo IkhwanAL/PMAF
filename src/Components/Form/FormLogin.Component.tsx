@@ -92,7 +92,7 @@ export const FormLogin = () => {
 	return (
 		<div className="h-screen bg-gradient-to-br from-blue-600 to-indigo-600 flex justify-center items-center w-full">
 			{setError()}
-			<form onSubmit={onSubmit} className="mr-80 w-fit shadow-lg z-40">
+			<form onSubmit={onSubmit} className=" w-fit shadow-lg z-40">
 				<div className="bg-white px-10 py-8 rounded-xl w-screen shadow-md max-w-sm">
 					<div className="space-y-4">
 						<h1 className="text-center text-2xl font-semibold text-gray-600">
@@ -127,7 +127,7 @@ export const FormLogin = () => {
 					<p className="items-center mt-4 mb-4 text-center">
 						Don't Have An Account
 					</p>
-					<div className="flex justify-center">
+					<div className="flex justify-center items-center ml-6">
 						<Link
 							to="/signup"
 							className="border-2 rounded-lg font-bold text-blue-500 px-4 py-3 transition duration-300 ease-in-out hover:bg-blue-500 hover:text-white mr-6"

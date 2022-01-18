@@ -66,7 +66,7 @@ export const FormRegister = () => {
 	return (
 		<div className="h-screen bg-gradient-to-br from-blue-600 to-indigo-600 flex justify-center items-center w-full">
 			<ErrorComp error={useError?.error} msg={useError?.msg} />
-			<form className="mr-96 z-40" onSubmit={onSubmit}>
+			<form className="z-40 w-fit shadow-lg" onSubmit={onSubmit}>
 				<div className="bg-white px-10 py-8 rounded-xl w-screen shadow-md max-w-sm">
 					<div className="space-y-4">
 						<h1 className="text-center text-2xl font-semibold text-gray-600">
