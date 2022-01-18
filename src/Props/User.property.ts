@@ -18,7 +18,7 @@ export enum TypeUser {
 export interface DataUser {
 	id: string;
 	username: string;
-	password: string;
+	password?: string;
 	email: string;
-	phoneNumber: string;
+	phoneNumber?: string;
 }

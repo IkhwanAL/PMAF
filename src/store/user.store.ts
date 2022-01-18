@@ -11,12 +11,18 @@ const initialState: DataUser = {
 	phoneNumber: "",
 };
 
-let state = initialState;
+let init = initialState;
 
 export const UserStore = {
 	subscribe: (
 		setUserState: React.Dispatch<React.SetStateAction<DataUser>>
 	) => {
-		subject.subscribe(setUserState);
+		return subject.subscribe(setUserState);
 	},
+
+	setValue: (user: DataUser) => {
+		init = user;
+		subject.next(init);
+	},
+	init,
 };

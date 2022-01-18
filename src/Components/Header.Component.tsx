@@ -27,9 +27,10 @@ export const Header = () => {
 		ev.preventDefault();
 		modalStore.changeValue(!modal);
 	};
+	console.log(modal);
 	return (
 		<>
-			<div className="flex text-gray-900 bg-white rounded-lg shadow-lg font-medium capitalize absolute w-full items-center h-14">
+			<div className="flex text-gray-900 bg-white rounded-lg shadow-lg font-medium capitalize absolute w-full items-center h-14 z-50">
 				<div className="flex items-center">
 					<div className="ml-1">
 						<p className="capitalize text-xl">Logo</p>
