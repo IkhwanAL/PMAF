@@ -15,6 +15,9 @@ module.exports = {
 			width: {
 				0: "0",
 			},
+			zIndex: {
+				100: "100",
+			},
 		},
 		keyframes: {
 			"fade-in-down": {

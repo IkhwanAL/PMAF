@@ -11,4 +11,5 @@ export interface ProjectData {
 	description: string;
 	dueDate?: string;
 	projectName: string;
+	recent?: boolean;
 }

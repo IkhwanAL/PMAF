@@ -2,6 +2,7 @@ import { LogoutIcon, UserIcon } from "@heroicons/react/solid";
 import React, { useLayoutEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { modalStore } from "../store/modal.store";
+import Backdrop from "./Modal/Backdrop.Component";
 import InfoModal from "./Modal/InfoUser.Component";
 
 export const Header = () => {
@@ -27,7 +28,7 @@ export const Header = () => {
 		ev.preventDefault();
 		modalStore.changeValue(!modal);
 	};
-	console.log(modal);
+
 	return (
 		<>
 			<div className="flex text-gray-900 bg-white rounded-lg shadow-lg font-medium capitalize absolute w-full items-center h-14 z-50">
@@ -66,9 +67,17 @@ export const Header = () => {
 				</div>
 			</div>
 			{modal ? (
-				<div className="flex justify-center translate-y-52">
-					<InfoModal setModal={onClickUserModal} modal={modal} />
-				</div>
+				<Backdrop
+					show={modal}
+					children={
+						<div className="flex justify-center translate-y-52 z-[100]">
+							<InfoModal
+								setModal={onClickUserModal}
+								modal={modal}
+							/>
+						</div>
+					}
+				/>
 			) : (
 				""
 			)}

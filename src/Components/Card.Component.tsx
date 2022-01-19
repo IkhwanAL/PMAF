@@ -2,9 +2,12 @@ import { Link } from "react-router-dom";
 import { ProjectData } from "../Props/Project.property";
 
 const CardProject = (project: ProjectData) => {
+	const link = project.recent
+		? `project/detail/${project.id}`
+		: `detail/${project.id}`;
 	return (
 		<div className="text-gray-700 max-w-md w-80 my-auto mx-auto ml-5 mr-5 mt-5 mb-5 bg-gray-100 p-4 py-5 px-5 rounded-xl hover:shadow-md hover:shadow-slate-300">
-			<Link to={`detail/${project.id}`}>
+			<Link to={link}>
 				<div className="flex justify-between">
 					<div>
 						<h2 className="text-lg"> {project.projectName} </h2>

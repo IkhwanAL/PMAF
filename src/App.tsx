@@ -20,7 +20,10 @@ function App() {
 				>
 					<Route index element={<RecentPage />} />
 					<Route path="project" element={<ProjectPage />} />
-					<Route path="detail/:idProject" element={<OneProject />} />
+					<Route
+						path="project/detail/:idProject"
+						element={<OneProject />}
+					/>
 				</Route>
 			</Routes>
 		</div>
