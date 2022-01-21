@@ -1,4 +1,17 @@
+import { useLayoutEffect, useState } from "react";
+import { DataUser } from "../../Props/User.property";
+import { UserStore } from "../../store/user.store";
+
 export default function FormUserUI() {
+	const [user, setUser] = useState<DataUser>(UserStore.init);
+
+	useLayoutEffect(() => {
+		const Subs = UserStore.subscribe(setUser);
+
+		return () => {
+			Subs.unsubscribe();
+		};
+	}, [user]);
 	return (
 		<>
 			<div className="m-10">

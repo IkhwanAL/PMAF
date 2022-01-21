@@ -1,9 +1,12 @@
 import React, { ReactElement, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserLogin } from "../../Props/User.property";
+import UserService from "../../Service/User.Service";
 import classes from "../../Styles/Triangle.module.scss";
 
 export const FormLogin = () => {
+	const Users = new UserService();
+
 	const [user, setUser] = useState<UserLogin | { [key: string]: string }>();
 	const [errorState, setErrorState] = useState<{
 		error: boolean;
@@ -43,6 +46,8 @@ export const FormLogin = () => {
 			setErrorState({ error: true, msg: "Password Kosong" });
 			return;
 		}
+
+		const result = Users.findUserByUsername(user.username).subscribe();
 
 		navigate("/main/dashboard", { replace: true });
 	};
