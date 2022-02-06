@@ -16,9 +16,10 @@ export enum TypeUser {
 }
 
 export interface DataUser {
-	id: string;
+	id: string | number;
 	username: string;
-	password?: string;
+	firstName: string;
+	lastname: string;
 	email: string;
 	phoneNumber?: string;
 }

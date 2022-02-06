@@ -1,9 +1,13 @@
 import React, { ReactElement, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { UserLogin } from "../../Props/User.property";
+import { getUserAsync, statusUser } from "../../redux/user/userSlice";
 import classes from "../../Styles/Triangle.module.scss";
 
 export const FormLogin = () => {
+	const dispatch = useDispatch();
+	const status = useSelector(statusUser);
 	const [user, setUser] = useState<UserLogin | { [key: string]: string }>();
 	const [errorState, setErrorState] = useState<{
 		error: boolean;
@@ -43,6 +47,7 @@ export const FormLogin = () => {
 			setErrorState({ error: true, msg: "Password Kosong" });
 			return;
 		}
+		dispatch(getUserAsync(user.username));
 
 		navigate("/main/dashboard", { replace: true });
 	};

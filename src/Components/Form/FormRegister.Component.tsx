@@ -6,7 +6,6 @@ import { ErrorComp } from "../Error.Component";
 
 export const FormRegister = () => {
 	const navigate = useNavigate();
-
 	const [userRegister, setUserRegister] = useState<
 		{ [key: string]: string } | UserRegister
 	>();

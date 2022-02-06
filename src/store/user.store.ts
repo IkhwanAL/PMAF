@@ -1,28 +1,44 @@
-import React from "react";
-import { Subject } from "rxjs";
-import { DataUser } from "../Props/User.property";
-const subject = new Subject<DataUser>();
+import {
+	BehaviorSubject,
+	distinctUntilKeyChanged,
+	Observable,
+	pluck,
+	Subscription,
+} from "rxjs";
 
-const initialState: DataUser = {
-	id: "",
-	username: "",
-	password: "",
-	email: "",
-	phoneNumber: "",
-};
+export interface Action {
+	type: string;
+	payload?: any;
+}
 
-let init = initialState;
+export class Store<T> {
+	private _state: BehaviorSubject<T>;
+	private _reducer: (state: T, action: Action) => T;
 
-export const UserStore = {
-	subscribe: (
-		setUserState: React.Dispatch<React.SetStateAction<DataUser>>
-	) => {
-		return subject.subscribe(setUserState);
-	},
+	constructor(reducer: (state: T, action: Action) => T, initialState: T) {
+		this._state = new BehaviorSubject(initialState);
+		this._reducer = reducer;
+	}
 
-	setValue: (user: DataUser) => {
-		init = user;
-		subject.next(init);
-	},
-	init,
-};
+	subscribe = (callback: (state: T) => void): Subscription => {
+		return this._state.subscribe(callback);
+	};
+
+	dispatch = (action: Action): void => {
+		const oldState = this._state.getValue();
+		const newState = this._reducer(oldState, action);
+		this._state.next(newState);
+	};
+
+	select<K extends keyof T>(key: K): Observable<T[K]> {
+		return this._state.pipe(distinctUntilKeyChanged(key), pluck(key));
+	}
+
+	asyncDispacth = async <R>(
+		type: string,
+		runner: (state: T) => Promise<R>
+	): Promise<void> => {
+		const payload = runner(this._state.getValue());
+		this.dispatch({ type, payload });
+	};
+}
